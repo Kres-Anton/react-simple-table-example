@@ -1,25 +1,36 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import ReactSimpleTable from "@harallio/react-simple-table";
+
+import { getData } from "./mockDataService";
 
 class App extends Component {
+  state = {
+    data: null
+  };
+
+  componentDidMount() {
+    getData().then(data => this.setState({ data }));
+  }
   render() {
+    const { data } = this.state;
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <ReactSimpleTable
+          title={"Frameworks"}
+          data={data}
+          onEdit={(index, data) => console.log(index, data)}
+          headerRowStyle={{ backgroundColor: "#bdc3c7" }}
+          headerCellStyle={{ color: "white" }}
+          cellStyle={{ color: "#bdc3c7" }}
+          containerStyle={{
+            height: "500px",
+            width: "50%",
+            justifyContent: "flex-start"
+          }}
+          onDelete={(i, data) => console.log(i, data)}
+        />
       </div>
     );
   }
