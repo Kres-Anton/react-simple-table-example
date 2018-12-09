@@ -1,4 +1,4 @@
-## For running
+## For launch
 ```sh
 git clone https://github.com/Kres-Anton/react-simple-table-example.git
 cd react-simple-table-example
